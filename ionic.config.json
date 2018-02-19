@@ -1,0 +1,8 @@
+{
+  "name": "ilgrigioreservation-scanapp",
+  "app_id": "10ebcd13",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
