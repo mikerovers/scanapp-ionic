@@ -5,30 +5,39 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AuthProvider } from '../providers/auth/auth';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    ListPage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    ListPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+    declarations: [
+        MyApp,
+        LoginPage,
+        HomePage,
+        ListPage,
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot()
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        LoginPage,
+        HomePage,
+        ListPage
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        AuthProvider,
+    ]
 })
-export class AppModule {}
+export class AppModule { }
