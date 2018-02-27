@@ -1,13 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
-/*
-  Generated class for the AuthProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthProvider {
     token: any;
@@ -15,17 +9,31 @@ export class AuthProvider {
     constructor(private http: HttpClient, private storage: Storage) {
     }
 
-    checkAuthentication() {
-        this.storage.get('token').then(result => {console.log(result)})
+    getHeaders(): HttpHeaders {
+        return new HttpHeaders({
+            'Authorization': `Bearer ${this.token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        });
+    }
+
+    generateParams(options: Object): HttpParams {
+        let params = new HttpParams();
+        Object.keys(options).forEach((key) => {
+            params = params.set(key, options[key]);
+        });
+
+        return params;
+    }
+
+    checkAuthentication(params: any[]) {
         return new Promise((resolve, reject) => {
-            this.storage.get('token').then((value) => {
-                this.token = value;
+            this.storage.get('token').then(result => { 
+                this.token = result; 
 
-                let headers = new HttpHeaders({
-                    'Authorization': `Bearer ${this.token}`
-                });
-
-                this.http.get('https://ilgrigioreservation.test.roerroe.com/api', {headers: headers})
+                this.http.get('https://ilgrigioreservation.test.roerroe.com/api', {
+                    headers: this.getHeaders(),
+                })
                     .subscribe(res => {
                         resolve(res);
                     }, (err) => {
