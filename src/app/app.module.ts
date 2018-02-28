@@ -6,12 +6,14 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { EventListPage } from '../pages/event-list/event-list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { IlgrigioProvider } from '../providers/ilgrigio/ilgrigio';
 
 @NgModule({
     declarations: [
@@ -19,6 +21,7 @@ import { IonicStorageModule } from '@ionic/storage';
         LoginPage,
         HomePage,
         ListPage,
+        EventListPage
     ],
     imports: [
         BrowserModule,
@@ -31,13 +34,15 @@ import { IonicStorageModule } from '@ionic/storage';
         MyApp,
         LoginPage,
         HomePage,
-        ListPage
+        ListPage,
+        EventListPage
     ],
     providers: [
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         AuthProvider,
+        IlgrigioProvider,
     ]
 })
 export class AppModule { }
