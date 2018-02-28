@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { EventListPage } from '../pages/event-list/event-list';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,7 +22,8 @@ import { IlgrigioProvider } from '../providers/ilgrigio/ilgrigio';
         LoginPage,
         HomePage,
         ListPage,
-        EventListPage
+        EventListPage,
+        SettingsPage
     ],
     imports: [
         BrowserModule,
@@ -35,7 +37,8 @@ import { IlgrigioProvider } from '../providers/ilgrigio/ilgrigio';
         LoginPage,
         HomePage,
         ListPage,
-        EventListPage
+        EventListPage,
+        SettingsPage
     ],
     providers: [
         StatusBar,

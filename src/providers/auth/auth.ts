@@ -26,7 +26,7 @@ export class AuthProvider {
         return params;
     }
 
-    checkAuthentication(params: any[]) {
+    checkAuthentication() {
         return new Promise((resolve, reject) => {
             this.storage.get('token').then(result => { 
                 this.token = result; 
