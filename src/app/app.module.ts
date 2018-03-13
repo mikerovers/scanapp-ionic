@@ -6,14 +6,19 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { ScanPage } from '../pages/scan/scan';
 import { SettingsPage } from '../pages/settings/settings';
 
 import { AuthProvider } from '../providers/auth/auth';
+import { ScanProvider } from '../providers/scan/scan';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Vibration } from '@ionic-native/vibration';
 import { HttpClientModule } from '@angular/common/http';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @NgModule({
     declarations: [
@@ -21,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
         HomePage,
         ListPage,
         LoginPage,
+        ScanPage,
         SettingsPage
     ],
     imports: [
@@ -34,14 +40,20 @@ import { HttpClientModule } from '@angular/common/http';
         MyApp,
         HomePage,
         ListPage,
+        ScanPage,
         LoginPage,
         SettingsPage
     ],
     providers: [
         StatusBar,
         SplashScreen,
+        Diagnostic,
+        BarcodeScanner,
+        ScanProvider,
+        Vibration,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        AuthProvider
+        AuthProvider,
+    ScanProvider
     ]
 })
 export class AppModule { }
