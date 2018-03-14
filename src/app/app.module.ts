@@ -9,8 +9,11 @@ import { LoginPage } from '../pages/login/login';
 import { ScanPage } from '../pages/scan/scan';
 import { SettingsPage } from '../pages/settings/settings';
 
+import { ComponentsModule } from '../components/components.module';
+
 import { AuthProvider } from '../providers/auth/auth';
 import { ScanProvider } from '../providers/scan/scan';
+import { OrderProvider } from '../providers/order/order';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,6 +35,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
     imports: [
         BrowserModule,
         HttpClientModule,
+        ComponentsModule,
         IonicModule.forRoot(MyApp),
         IonicStorageModule.forRoot()
     ],
@@ -53,7 +57,8 @@ import { Diagnostic } from '@ionic-native/diagnostic';
         Vibration,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         AuthProvider,
-    ScanProvider
+    ScanProvider,
+    OrderProvider
     ]
 })
 export class AppModule { }

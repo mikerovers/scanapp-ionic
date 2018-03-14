@@ -9,5 +9,7 @@
 
 
 <ion-content padding>
-    <button ion-button (click)="onStartScanning(event)">Start scanning</button>
+    <button ion-button full color="danger" (click)="onStartScanning(event)">Start scanning</button>
+
+    <order-detail [order]="order"></order-detail>
 </ion-content>
