@@ -11,11 +11,11 @@ import { Event } from '../../models/event';
     templateUrl: 'event-list.html',
 })
 export class EventListPage implements OnInit {
-    selectedEvent: Event;
     events: Event[] = [];
     page: number = 1;
     perPage: number = 10;
     pageStart: number = 0;
+    pageEnd: number = this.page * this.perPage;
     total: number; 
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public eventProvider: EventProvider) {
@@ -26,16 +26,16 @@ export class EventListPage implements OnInit {
     }
 
     getEventList(): void {
-        this.eventProvider.getEventList().subscribe(result => {{
-            this.total = result.length;
-            console.log(this.total);
-            for(let i = this.pageStart; i < (this.page*this.perPage); i++){
-                if(i < this.total){
-                    this.events.push(result[i]);
-                }       
+        const options = {
+            limit: this.perPage,
+            offset: this.pageStart
+        };
+        console.log(options);
+        this.eventProvider.getEventList(options).subscribe(result => {{
+            for(let i = 0; i < result.length; i++){
+                this.events.push(result[i]);
             }
-        }}
-    );
+        }});
     }
 
     ngOnInit(): void {
@@ -44,15 +44,14 @@ export class EventListPage implements OnInit {
 
     goToEventDetailPage(event: Event): void {
         this.navCtrl.push('event', {
-            'id': event.id
+            'event': event
         })
     }
 
     doInfinite(infiniteScroll): void {
-        this.pageStart = (this.page*this.perPage) + 1;
+        this.pageStart = this.pageEnd + 1;
         this.page++;
-        console.log(this.pageStart);
-        console.log(this.perPage);
+        this.pageEnd = this.page * this.perPage;
         setTimeout(() => {
             this.getEventList();
             infiniteScroll.complete();

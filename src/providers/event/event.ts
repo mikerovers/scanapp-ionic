@@ -14,12 +14,12 @@ export class EventProvider {
         console.log('Hello EventProvider Provider');
     }
 
-    getEventList(): Observable<Event[]> {
-        return this.http.get<Event[]>(this.url, { headers: this.authProvider.getHeaders() });
+    getEventList(options: Object): Observable<Event[]> {
+        return this.http.get<Event[]>(this.url, { headers: this.authProvider.getHeaders(), params: this.authProvider.generateParams(options) });
     }
 
     getEvent(id: number): Observable<Event> {
-        const url = `${this.url}/${id}`;
+        const url: string = `${this.url}/${id}`;
         return this.http.get<Event>(url, { headers: this.authProvider.getHeaders() });
     }
 }
