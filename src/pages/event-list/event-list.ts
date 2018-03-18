@@ -55,6 +55,6 @@ export class EventListPage implements OnInit {
         setTimeout(() => {
             this.getEventList();
             infiniteScroll.complete();
-          }, 500);
+          }, 1000);
     }
 }
