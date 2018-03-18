@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div *ngIf="event">
+        <h2>{{ event.name | uppercase }}</h2>
+        <div><span>id: </span>{{event.id}}</div>
+    </div>
+</ion-content>

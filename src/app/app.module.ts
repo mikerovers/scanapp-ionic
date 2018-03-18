@@ -14,6 +14,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
+import { EventProvider } from '../providers/event/event';
+import { EventListPage } from '../pages/event-list/event-list';
 
 @NgModule({
     declarations: [
@@ -21,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
         HomePage,
         ListPage,
         LoginPage,
-        SettingsPage
+        SettingsPage,
+        EventListPage
     ],
     imports: [
         BrowserModule,
@@ -35,13 +38,15 @@ import { HttpClientModule } from '@angular/common/http';
         HomePage,
         ListPage,
         LoginPage,
-        SettingsPage
+        SettingsPage,
+        EventListPage
     ],
     providers: [
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        AuthProvider
+        AuthProvider,
+        EventProvider
     ]
 })
 export class AppModule { }
