@@ -26,11 +26,10 @@ export class EventListPage implements OnInit {
     }
 
     getEventList(): void {
-        const options = {
+        const options: object = {
             limit: this.perPage,
             offset: this.pageStart
         };
-        console.log(options);
         this.eventProvider.getEventList(options).subscribe(result => {{
             for(let i = 0; i < result.length; i++){
                 this.events.push(result[i]);
