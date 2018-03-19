@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { ScanPage } from '../pages/scan/scan';
 import { SettingsPage } from '../pages/settings/settings';
+import { AddNotePage } from '../pages/add-note/add-note';
 
 import { ComponentsModule } from '../components/components.module';
 
@@ -22,15 +23,17 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Vibration } from '@ionic-native/vibration';
 import { HttpClientModule } from '@angular/common/http';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { FormBuilder } from '@angular/forms';
 
 @NgModule({
     declarations: [
         MyApp,
+        AddNotePage,
         HomePage,
         ListPage,
         LoginPage,
         ScanPage,
-        SettingsPage
+        SettingsPage,
     ],
     imports: [
         BrowserModule,
@@ -42,6 +45,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
+        AddNotePage,
         HomePage,
         ListPage,
         ScanPage,
@@ -52,13 +56,14 @@ import { Diagnostic } from '@ionic-native/diagnostic';
         StatusBar,
         SplashScreen,
         Diagnostic,
+        FormBuilder,
         BarcodeScanner,
         ScanProvider,
         Vibration,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         AuthProvider,
-    ScanProvider,
-    OrderProvider
+        ScanProvider,
+        OrderProvider
     ]
 })
 export class AppModule { }

@@ -1,4 +1,9 @@
+import { Contingent } from "./contingent";
+import { PriceType } from "./pricetype";
+
 export interface Ticket {
-    id: Number,
-    price: Number
+    id: number,
+    price: number,
+    contingent: Contingent,
+    pricetype: PriceType
 }
