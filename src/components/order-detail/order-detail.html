@@ -20,7 +20,7 @@
         </ion-card-header>
         <ion-list>
             <ion-item *ngFor="let note of notes">
-                {{ note.note_text }}
+                <span item-start>{{ note.note_text }}</span><span item-end>{{ note.created_at }}</span>
             </ion-item>
             <ion-item>
                 <button ion-button (click)="openAddNotePage()">Make new note</button>
