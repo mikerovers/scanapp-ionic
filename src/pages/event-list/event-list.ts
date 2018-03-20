@@ -25,7 +25,7 @@ export class EventListPage implements OnInit {
         console.log('ionViewDidLoad EventListPage');
     }
 
-    getEventList(): void {
+    getEventList(infiniteScroll?): void {
         const options: object = {
             limit: this.perPage,
             offset: this.pageStart
@@ -34,6 +34,7 @@ export class EventListPage implements OnInit {
             for(let i = 0; i < result.length; i++){
                 this.events.push(result[i]);
             }
+            infiniteScroll.complete();
         }});
     }
 
@@ -51,9 +52,6 @@ export class EventListPage implements OnInit {
         this.pageStart = this.pageEnd + 1;
         this.page++;
         this.pageEnd = this.page * this.perPage;
-        setTimeout(() => {
-            this.getEventList();
-            infiniteScroll.complete();
-          }, 1000);
+        this.getEventList(infiniteScroll);
     }
 }
