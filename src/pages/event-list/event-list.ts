@@ -34,7 +34,9 @@ export class EventListPage implements OnInit {
             for(let i = 0; i < result.length; i++){
                 this.events.push(result[i]);
             }
-            infiniteScroll.complete();
+            if(infiniteScroll){
+                infiniteScroll.complete();
+            }
         }});
     }
 
