@@ -3,6 +3,7 @@ import { IonicPage, NavController, Loading, LoadingController } from 'ionic-angu
 
 import { AuthProvider } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
+import { ScanPage } from '../scan/scan';
 import { UserCredentials } from '../../models/user-credentials';
 
 /**
@@ -32,7 +33,7 @@ export class LoginPage {
         this.authProvider.checkAuthentication().then((res) => {
             console.log('User is authenticated');
             this.loader.dismiss();
-            this.navCtrl.setRoot(HomePage);
+            this.navCtrl.setRoot(ScanPage);
         }, (errr) => {
             console.error('User not authenticated');
             this.loader.dismiss();
