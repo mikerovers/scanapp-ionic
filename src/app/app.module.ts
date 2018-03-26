@@ -22,6 +22,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Vibration } from '@ionic-native/vibration';
 import { HttpClientModule } from '@angular/common/http';
+import { EventProvider } from '../providers/event/event';
+import { EventListPage } from '../pages/event-list/event-list';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { FormBuilder } from '@angular/forms';
 
@@ -32,8 +34,9 @@ import { FormBuilder } from '@angular/forms';
         HomePage,
         ListPage,
         LoginPage,
-        ScanPage,
         SettingsPage,
+        EventListPage
+        ScanPage,
     ],
     imports: [
         BrowserModule,
@@ -50,7 +53,8 @@ import { FormBuilder } from '@angular/forms';
         ListPage,
         ScanPage,
         LoginPage,
-        SettingsPage
+        SettingsPage,
+        EventListPage
     ],
     providers: [
         StatusBar,
@@ -62,6 +66,7 @@ import { FormBuilder } from '@angular/forms';
         Vibration,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         AuthProvider,
+        EventProvider
         ScanProvider,
         OrderProvider
     ]

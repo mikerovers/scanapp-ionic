@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { ScanPage } from '../pages/scan/scan';
 import { SettingsPage } from '../pages/settings/settings';
+import { EventListPage } from '../pages/event-list/event-list';
 
 @Component({
     templateUrl: 'app.html'
@@ -27,6 +28,7 @@ export class MyApp {
             { title: 'Home', component: HomePage },
             { title: 'Scan', component: ScanPage },
             { title: 'List', component: ListPage },
+            { title: 'Events', component: EventListPage },
             { title: 'Settings', component: SettingsPage }
         ];
 

@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { Event } from '../../models/event';
+import { EventProvider } from '../../providers/event/event';
+
+@IonicPage({
+    name: 'event',
+    segment: 'event/:event'
+})
+@Component({
+    selector: 'page-event-detail',
+    templateUrl: 'event-detail.html',
+})
+export class EventDetailPage {
+    event: Event;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, public eventProvider: EventProvider) {
+        this.event = this.navParams.get('event');
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad EventDetailPage');
+    }
+}

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div *ngIf="event">
+        <h2>{{ order.name | uppercase }}</h2>
+        <div><span>id: </span>{{order.id}}</div>
+    </div>
+    <ion-list>
+        <ion-item *ngFor="let order of orders" (click)="goToOrderDetailPage(order)">{{order.name}}</ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
