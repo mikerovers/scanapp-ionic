@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Note } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Order } from '../../models/order';
 
 import { ScanProvider } from '../../providers/scan/scan';
 import { OrderProvider } from '../../providers/order/order';
 import { AddNotePage } from '../add-note/add-note';
+import { Note } from '../../models/note';
 
 @IonicPage()
 @Component({
