@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../../providers/auth/auth';
 
 import { Order } from '../../models/order';
-import { Note } from 'ionic-angular';
+import { Note } from '../../models/note';
 
 @Injectable()
 export class OrderProvider {

@@ -35,7 +35,7 @@ import { FormBuilder } from '@angular/forms';
         ListPage,
         LoginPage,
         SettingsPage,
-        EventListPage
+        EventListPage,
         ScanPage,
     ],
     imports: [
@@ -66,7 +66,7 @@ import { FormBuilder } from '@angular/forms';
         Vibration,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         AuthProvider,
-        EventProvider
+        EventProvider,
         ScanProvider,
         OrderProvider
     ]
