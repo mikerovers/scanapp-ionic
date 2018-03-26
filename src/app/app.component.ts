@@ -29,7 +29,6 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage },
       { title: 'Events', component: EventListPage },
     ];
-
   }
 
   initializeApp() {

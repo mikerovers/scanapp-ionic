@@ -16,7 +16,6 @@ export class EventListPage implements OnInit {
     perPage: number = 10;
     pageStart: number = 0;
     pageEnd: number = this.page * this.perPage;
-    total: number; 
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public eventProvider: EventProvider) {
     }
@@ -25,35 +24,41 @@ export class EventListPage implements OnInit {
         console.log('ionViewDidLoad EventListPage');
     }
 
-    getEventList(infiniteScroll?): void {
+    getEventList(): Promise<any> {
         const options: object = {
             limit: this.perPage,
             offset: this.pageStart
         };
-        this.eventProvider.getEventList(options).subscribe(result => {{
-            for(let i = 0; i < result.length; i++){
-                this.events.push(result[i]);
-            }
-            if(infiniteScroll){
-                infiniteScroll.complete();
-            }
-        }});
+        return new Promise((resolve, reject) => {
+            this.eventProvider.getEventList(options).subscribe(result => {{
+                resolve(result);
+            }});
+        });
     }
 
     ngOnInit(): void {
-        this.getEventList();
+        this.getEventList().then((result) => {
+            for(let i = 0; i < result.length; i++){
+                this.events.push(result[i]);
+        }
+    });
     }
 
     goToEventDetailPage(event: Event): void {
         this.navCtrl.push('event', {
             'event': event
-        })
+        });
     }
 
     doInfinite(infiniteScroll): void {
         this.pageStart = this.pageEnd + 1;
         this.page++;
         this.pageEnd = this.page * this.perPage;
-        this.getEventList(infiniteScroll);
+        this.getEventList().then((result) => {
+            for(let i = 0; i < result.length; i++){
+                this.events.push(result[i]);
+        }   
+        infiniteScroll.complete();
+    });
     }
 }
