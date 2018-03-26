@@ -10,6 +10,8 @@ import { ScanPage } from '../pages/scan/scan';
 import { SettingsPage } from '../pages/settings/settings';
 import { EventListPage } from '../pages/event-list/event-list';
 
+import { SettingsProvider } from '../providers/settings/settings';
+
 @Component({
     templateUrl: 'app.html'
 })
@@ -17,10 +19,16 @@ export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
     rootPage: any = LoginPage;
-
+    selectedTheme: String;
     pages: Array<{ title: string, component: any }>;
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private settings: SettingsProvider) {
+        // Initialize theming.
+        this.settings.getActiveTheme().subscribe((val) => {
+            this.selectedTheme = val;
+        });
+        // Initialize theming.
+
         this.initializeApp();
 
         // used for an example of ngFor and navigation
