@@ -19,6 +19,7 @@ import { OrderProvider } from '../providers/order/order';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
+import { OneSignal } from '@ionic-native/onesignal';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Vibration } from '@ionic-native/vibration';
 import { HttpClientModule } from '@angular/common/http';
@@ -58,6 +59,7 @@ import { FormBuilder } from '@angular/forms';
     ],
     providers: [
         StatusBar,
+        OneSignal,
         SplashScreen,
         Diagnostic,
         FormBuilder,
