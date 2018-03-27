@@ -11,6 +11,17 @@
                 <span item-start>{{ ticket.contingent.name }}</span><span item-end>{{ ticket.pricetype.name }}</span>
             </ion-item>
         </ion-list>
+    </ion-card>    <ion-card *ngIf="order.tickets">
+        <ion-card-header>
+            <ion-icon name="copy" item-start></ion-icon>
+            Tickets
+        </ion-card-header>
+
+        <ion-list>
+            <ion-item *ngFor="let ticket of order['tickets']"> 
+                <span item-start>{{ ticket.contingent.name }}</span><span item-end>{{ ticket.pricetype.name }}</span>
+            </ion-item>
+        </ion-list>
     </ion-card>
 
     <ion-card>
