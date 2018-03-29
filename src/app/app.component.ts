@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, NavController, AlertController, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -12,6 +12,7 @@ import { EventListPage } from '../pages/event-list/event-list';
 import { OneSignal } from '@ionic-native/onesignal';
 
 import { SettingsProvider } from '../providers/settings/settings';
+import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
     templateUrl: 'app.html'
@@ -23,7 +24,15 @@ export class MyApp {
     selectedTheme: String;
     pages: Array<{ title: string, component: any }>;
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private oneSignal: OneSignal, private settings: SettingsProvider) {
+    constructor(public platform: Platform, 
+        public statusBar: StatusBar, 
+        public splashScreen: SplashScreen, 
+        public oneSignal: OneSignal, 
+        public settings: SettingsProvider, 
+        public auth: AuthProvider,
+        public alertCtrl: AlertController,
+        public app: App
+    ) {
         // Initialize theming.
         this.settings.getActiveTheme().subscribe((val) => {
             this.selectedTheme = val;
@@ -42,29 +51,55 @@ export class MyApp {
 
     }
 
+    gotoScanPage() {
+        this.auth.checkAuthentication().then((res) => {
+            this.app.getActiveNav().setRoot(ScanPage);
+        }).catch((err) => {
+            this.app.getActiveNav().setRoot(LoginPage);
+        });
+    }
+
     initializeApp() {
         this.platform.ready().then(() => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            if (this.platform.is('android')) {
+            if (this.platform.is('windows')) {
                 this.oneSignal.startInit('474ee522-5530-4a2d-8cb5-59ec54a44af3', '584570705732');
                 this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
                 this.oneSignal.handleNotificationReceived().subscribe(notification => {
                     if (notification.isAppInFocus) {
-                        // vraag de gebruiker of hij in wil gaan op de notificatie. 
+                        let alert = this.alertCtrl.create({
+                            title: 'Start scanning?',
+                            message: 'Do you want to open the scan page?',
+                            buttons: [
+                                {
+                                    text: 'No',
+                                    role: 'cancel',
+                                }, 
+                                {
+                                    text: 'Open',
+                                    handler: () => {
+                                        this.gotoScanPage();
+                                    }
+                                }
+                            ]
+                        });
                     } else {
-                        // de gebruiker klikte op een notificatie en wil sowieso naar je item navigeren (optie 1). 
+                        this.gotoScanPage();
                     }
                 });
                 this.oneSignal.handleNotificationOpened().subscribe(openEvent => {
-                    // de gebruiker klikte op een notificatie en wil sowieso naar je item navigeren (optie 2). this.nav.setRoot(TabsPage, { tabname: openEvent.notification.payload.additionalData.tabname }); 
+                    this.auth.checkAuthentication().then((res) => {
+                        this.gotoScanPage();
+                    }).catch((err) => {
+                        this.gotoScanPage();
+                    });
                 });
                 this.oneSignal.endInit();
             }
         });
     }
+
 
     openPage(page) {
         // Reset the content nav to have just this page
