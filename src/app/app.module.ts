@@ -3,8 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { ScanPage } from '../pages/scan/scan';
 import { SettingsPage } from '../pages/settings/settings';
@@ -35,8 +33,6 @@ import { SettingsProvider } from '../providers/settings/settings';
     declarations: [
         MyApp,
         AddNotePage,
-        HomePage,
-        ListPage,
         LoginPage,
         SettingsPage,
         EventListPage,
@@ -53,8 +49,6 @@ import { SettingsProvider } from '../providers/settings/settings';
     entryComponents: [
         MyApp,
         AddNotePage,
-        HomePage,
-        ListPage,
         ScanPage,
         LoginPage,
         SettingsPage,

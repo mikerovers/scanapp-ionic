@@ -7,6 +7,8 @@ import { ScanProvider } from '../../providers/scan/scan';
 import { OrderProvider } from '../../providers/order/order';
 import { AddNotePage } from '../add-note/add-note';
 import { Note } from '../../models/note';
+import { AuthProvider } from '../../providers/auth/auth';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -17,7 +19,7 @@ export class ScanPage {
     order: Order;
     notes: Note[];
 
-    constructor(public scanService: ScanProvider, public orderService: OrderProvider, public navCtrl: NavController) {
+    constructor(public auth: AuthProvider, public scanService: ScanProvider, public orderService: OrderProvider, public navCtrl: NavController) {
     }
 
     ionViewDidLoad() {
@@ -30,6 +32,16 @@ export class ScanPage {
         }, (error) => {
             console.log('Something went wrong with retreiving the notes', error.text);
         });
+    }
+
+    ionViewCanEnter() {
+        this.auth.checkAuthentication()
+            .then((result) => {
+                return true;
+            }).catch((err) => {
+                this.navCtrl.setRoot(LoginPage);
+                return false;
+            });
     }
 
     onStartScanning(event) {
