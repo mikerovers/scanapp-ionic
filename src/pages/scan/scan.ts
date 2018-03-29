@@ -39,7 +39,6 @@ export class ScanPage {
             .then((result) => {
                 return true;
             }).catch((err) => {
-                this.navCtrl.setRoot(LoginPage);
                 return false;
             });
     }

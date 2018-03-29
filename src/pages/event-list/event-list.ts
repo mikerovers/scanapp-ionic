@@ -30,7 +30,6 @@ export class EventListPage implements OnInit {
             .then((result) => {
                 return true;
             }).catch((err) => {
-                this.navCtrl.setRoot(LoginPage);
                 return false;
             });
     }
