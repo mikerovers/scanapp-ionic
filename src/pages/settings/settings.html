@@ -12,10 +12,12 @@
     </button>
     <ion-title>SettingsPage</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+    <button ion-button full icon-left (click)="toggleAppTheme()">
+        <ion-icon name="bulb"></ion-icon>Switch Theme
+    </button>
     <button ion-button full (click)="logout()">Logout</button>
 </ion-content>
