@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { OnInit } from '@angular/core';
 
 import { EventProvider } from '../../providers/event/event';
 import { Event } from '../../models/event';
@@ -13,7 +12,7 @@ import { Event } from '../../models/event';
 export class EventListPage implements OnInit {
     events: Event[] = [];
     page: number = 1;
-    perPage: number = 10;
+    perPage: number = 15;
     pageStart: number = 0;
     pageEnd: number = this.page * this.perPage;
 
@@ -38,10 +37,8 @@ export class EventListPage implements OnInit {
 
     ngOnInit(): void {
         this.getEventList().then((result) => {
-            for(let i = 0; i < result.length; i++){
-                this.events.push(result[i]);
-        }
-    });
+           this.fillEventList(result);
+        });
     }
 
     goToEventDetailPage(event: Event): void {
@@ -50,15 +47,19 @@ export class EventListPage implements OnInit {
         });
     }
 
+    fillEventList(result): void {
+        for(let i = 0; i < result.length; i++){
+            this.events.push(result[i]);
+        }   
+    }
+
     doInfinite(infiniteScroll): void {
         this.pageStart = this.pageEnd + 1;
         this.page++;
         this.pageEnd = this.page * this.perPage;
         this.getEventList().then((result) => {
-            for(let i = 0; i < result.length; i++){
-                this.events.push(result[i]);
-        }   
-        infiniteScroll.complete();
-    });
+            this.fillEventList(result);
+            infiniteScroll.complete();
+        });
     }
 }
