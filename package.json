@@ -70,7 +70,7 @@
       "cordova-plugin-vibration": {},
       "cordova.plugins.diagnostic": {},
       "cordova-plugin-x-socialsharing": {},
-      "onesignal-cordova-plugin": {}
+      "onesignal-cordova-plugin": {},
       "cordova-open-native-settings": {},
       "cordova-plugin-app-preferences": {}
     },
