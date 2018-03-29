@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { EventProvider } from '../../providers/event/event';
 import { Event } from '../../models/event';
+import { AuthProvider } from '../../providers/auth/auth';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -16,11 +18,21 @@ export class EventListPage implements OnInit {
     pageStart: number = 0;
     pageEnd: number = this.page * this.perPage;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public eventProvider: EventProvider) {
+    constructor(public auth: AuthProvider, public navCtrl: NavController, public navParams: NavParams, public eventProvider: EventProvider) {
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad EventListPage');
+    }
+
+    ionViewCanEnter() {
+        this.auth.checkAuthentication()
+            .then((result) => {
+                return true;
+            }).catch((err) => {
+                this.navCtrl.setRoot(LoginPage);
+                return false;
+            });
     }
 
     getEventList(): Promise<any> {
