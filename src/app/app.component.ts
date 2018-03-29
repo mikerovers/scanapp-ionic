@@ -3,8 +3,6 @@ import { Nav, Platform, NavController, AlertController, App } from 'ionic-angula
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { ScanPage } from '../pages/scan/scan';
 import { SettingsPage } from '../pages/settings/settings';
