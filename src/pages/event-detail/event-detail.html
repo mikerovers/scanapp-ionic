@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Details</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card *ngIf="event">
+        <ion-card-header>
+            <ion-icon name="information-circle" item-start></ion-icon>
+            {{ event.name | uppercase }}
+        </ion-card-header>
+
+        <ion-card-content>
+
+            <ion-list-header>
+                Availability
+            </ion-list-header>
+
+            <ion-list *ngFor="let contingent of event.contingents" margin>
+                <p *ngIf="contingent.available != null">{{contingent.name}} - {{contingent.available}}</p>
+            </ion-list>
+
+            <ion-grid *ngIf="size > 0">
+                <ion-row>
+                    <ion-col>
+                        <button ion-button icon-only color="primary" (click)="facebookShare()" clear>
+                            <ion-icon class="share-icon" name="logo-facebook"></ion-icon>
+                        </button>
+                        <button ion-button icon-only color="primary" (click)="whatsAppShare()" clear>
+                            <ion-icon class="share-icon" name="logo-whatsapp"></ion-icon>
+                        </button>
+                        <button ion-button icon-only color="primary" (click)="twitterShare()" clear>
+                            <ion-icon class="share-icon" name="logo-twitter"></ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-list-header>
+                Orders
+            </ion-list-header>
+
+            <ion-list>
+                <ion-item *ngFor="let order of orders">{{order.contact_information.full_name}}</ion-item>
+            </ion-list>
+
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+                <ion-infinite-scroll-content></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+
+        </ion-card-content>
+    </ion-card>
+</ion-content>

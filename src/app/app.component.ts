@@ -1,47 +1,105 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { ScanPage } from '../pages/scan/scan';
 import { SettingsPage } from '../pages/settings/settings';
+import { EventListPage } from '../pages/event-list/event-list';
+// import { OneSignal } from '@ionic-native/onesignal';
+
+import { SettingsProvider } from '../providers/settings/settings';
+import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
-  templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+    @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+    rootPage: any = LoginPage;
+    selectedTheme: String;
+    pages: Array<{ title: string, component: any }>;
 
-  pages: Array<{title: string, component: any}>;
+    constructor(public platform: Platform, 
+        public statusBar: StatusBar, 
+        public splashScreen: SplashScreen, 
+        public settings: SettingsProvider, 
+        public auth: AuthProvider,
+        public alertCtrl: AlertController,
+        public app: App
+    ) {
+        // Initialize theming.
+        this.settings.getActiveTheme().subscribe((val) => {
+            this.selectedTheme = val;
+        });
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+        this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Settings', component: SettingsPage }
-    ];
+        // used for an example of ngFor and navigation
+        this.pages = [
+            { title: 'Scan', component: ScanPage },
+            { title: 'Events', component: EventListPage },
+            { title: 'Settings', component: SettingsPage }
+        ];
 
-  }
+    }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
+    gotoScanPage() {
+        this.auth.checkAuthentication().then((res) => {
+            this.app.getActiveNav().setRoot(ScanPage);
+        }).catch((err) => {
+            this.app.getActiveNav().setRoot(LoginPage);
+        });
+    }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
+    initializeApp() {
+        this.platform.ready().then(() => {
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+            // if (this.platform.is('windows')) {
+            //     this.oneSignal.startInit('474ee522-5530-4a2d-8cb5-59ec54a44af3', '584570705732');
+            //     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+            //     this.oneSignal.handleNotificationReceived().subscribe(notification => {
+            //         if (notification.isAppInFocus) {
+            //             let alert = this.alertCtrl.create({
+            //                 title: 'Start scanning?',
+            //                 message: 'Do you want to open the scan page?',
+            //                 buttons: [
+            //                     {
+            //                         text: 'No',
+            //                         role: 'cancel',
+            //                     }, 
+            //                     {
+            //                         text: 'Open',
+            //                         handler: () => {
+            //                             this.gotoScanPage();
+            //                         }
+            //                     }
+            //                 ]
+            //             });
+            //             alert.present();
+            //         } else {
+            //             this.gotoScanPage();
+            //         }
+            //     });
+            //     this.oneSignal.handleNotificationOpened().subscribe(openEvent => {
+            //         this.auth.checkAuthentication().then((res) => {
+            //             this.gotoScanPage();
+            //         }).catch((err) => {
+            //             this.gotoScanPage();
+            //         });
+            //     });
+            //     this.oneSignal.endInit();
+            // }
+        });
+    }
+
+
+    openPage(page) {
+        // Reset the content nav to have just this page
+        // we wouldn't want the back button to show in this scenario
+        this.nav.setRoot(page.component);
+    }
 }
