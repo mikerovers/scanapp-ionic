@@ -90,7 +90,7 @@
     <allow-navigation href="http://192.168.2.36:8100" />
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.3.2" />
     <plugin name="onesignal-cordova-plugin" spec="^2.3.3" />
-    <engine name="android" spec="~7.0.0" />
     <allow-navigation href="http://172.20.10.2:8100" />
+    <engine name="android" spec="7.0.0" />
     <engine name="ios" spec="4.5.4" />
 </widget>
