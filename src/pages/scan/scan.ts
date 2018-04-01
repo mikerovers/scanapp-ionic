@@ -27,12 +27,12 @@ export class ScanPage {
     }
 
     ionViewCanEnter() {
-            this.auth.checkAuthentication()
-                .then((result) => {
-                    return true;
-                }).catch((err) => {
-                    return false;
-                });
+        this.auth.checkAuthentication()
+            .then((result) => {
+                return true;
+            }).catch((err) => {
+                return false;
+            });
     }
 
     showNotAvailableError() {
