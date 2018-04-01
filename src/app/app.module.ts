@@ -26,7 +26,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { FormBuilder } from '@angular/forms';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { OneSignal } from '@ionic-native/onesignal';
+// import { OneSignal } from '@ionic-native/onesignal';
 import { SettingsProvider } from '../providers/settings/settings';
 
 @NgModule({
@@ -70,7 +70,7 @@ import { SettingsProvider } from '../providers/settings/settings';
         ScanProvider,
         OrderProvider,
         SocialSharing,
-        OneSignal
+        // OneSignal
     ]
 })
 export class AppModule { }

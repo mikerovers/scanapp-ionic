@@ -17,7 +17,7 @@ export class ScanProvider {
                 console.log(authorized);
                 
                 if(!authorized) {
-
+                    resolve(false);
                 } else {
                     resolve(true);
                 }

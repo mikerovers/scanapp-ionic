@@ -7,7 +7,7 @@ import { LoginPage } from '../pages/login/login';
 import { ScanPage } from '../pages/scan/scan';
 import { SettingsPage } from '../pages/settings/settings';
 import { EventListPage } from '../pages/event-list/event-list';
-import { OneSignal } from '@ionic-native/onesignal';
+// import { OneSignal } from '@ionic-native/onesignal';
 
 import { SettingsProvider } from '../providers/settings/settings';
 import { AuthProvider } from '../providers/auth/auth';
@@ -25,7 +25,6 @@ export class MyApp {
     constructor(public platform: Platform, 
         public statusBar: StatusBar, 
         public splashScreen: SplashScreen, 
-        public oneSignal: OneSignal, 
         public settings: SettingsProvider, 
         public auth: AuthProvider,
         public alertCtrl: AlertController,
@@ -59,41 +58,41 @@ export class MyApp {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            if (this.platform.is('windows')) {
-                this.oneSignal.startInit('474ee522-5530-4a2d-8cb5-59ec54a44af3', '584570705732');
-                this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-                this.oneSignal.handleNotificationReceived().subscribe(notification => {
-                    if (notification.isAppInFocus) {
-                        let alert = this.alertCtrl.create({
-                            title: 'Start scanning?',
-                            message: 'Do you want to open the scan page?',
-                            buttons: [
-                                {
-                                    text: 'No',
-                                    role: 'cancel',
-                                }, 
-                                {
-                                    text: 'Open',
-                                    handler: () => {
-                                        this.gotoScanPage();
-                                    }
-                                }
-                            ]
-                        });
-                        alert.present();
-                    } else {
-                        this.gotoScanPage();
-                    }
-                });
-                this.oneSignal.handleNotificationOpened().subscribe(openEvent => {
-                    this.auth.checkAuthentication().then((res) => {
-                        this.gotoScanPage();
-                    }).catch((err) => {
-                        this.gotoScanPage();
-                    });
-                });
-                this.oneSignal.endInit();
-            }
+            // if (this.platform.is('windows')) {
+            //     this.oneSignal.startInit('474ee522-5530-4a2d-8cb5-59ec54a44af3', '584570705732');
+            //     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+            //     this.oneSignal.handleNotificationReceived().subscribe(notification => {
+            //         if (notification.isAppInFocus) {
+            //             let alert = this.alertCtrl.create({
+            //                 title: 'Start scanning?',
+            //                 message: 'Do you want to open the scan page?',
+            //                 buttons: [
+            //                     {
+            //                         text: 'No',
+            //                         role: 'cancel',
+            //                     }, 
+            //                     {
+            //                         text: 'Open',
+            //                         handler: () => {
+            //                             this.gotoScanPage();
+            //                         }
+            //                     }
+            //                 ]
+            //             });
+            //             alert.present();
+            //         } else {
+            //             this.gotoScanPage();
+            //         }
+            //     });
+            //     this.oneSignal.handleNotificationOpened().subscribe(openEvent => {
+            //         this.auth.checkAuthentication().then((res) => {
+            //             this.gotoScanPage();
+            //         }).catch((err) => {
+            //             this.gotoScanPage();
+            //         });
+            //     });
+            //     this.oneSignal.endInit();
+            // }
         });
     }
 
