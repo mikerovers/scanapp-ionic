@@ -45,8 +45,8 @@ export class ScanPage {
     }
 
     onStartScanning(event) {
-        this.scanService.canScan().then((canScan) => {
-            if(canScan) {
+        // this.scanService.canScan().then((canScan) => {
+        //     if(canScan) {
                 this.scanService.startScanning().then((scanData) => {
                     console.log(`Scanned: ${scanData.text}`);
                     
@@ -64,11 +64,11 @@ export class ScanPage {
                         console.log('Something went wrong with retreiving the notes', error.text);
                     });
                 });
-            } else {
-                this.showNotAvailableError();
-            }
-        }).catch((err) => {
-            this.showNotAvailableError();
-        });
+        //     } else {
+        //         this.showNotAvailableError();
+        //     }
+        // }).catch((err) => {
+        //     this.showNotAvailableError();
+        // });
     }
 }
