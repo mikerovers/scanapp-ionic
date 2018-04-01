@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventProvider } from '../../providers/event/event';
 import { Event } from '../../models/event';
 import { AuthProvider } from '../../providers/auth/auth';
-import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({

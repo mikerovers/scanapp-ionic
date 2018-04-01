@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner';

@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 import { Order } from '../../models/order';
 
 import { ScanProvider } from '../../providers/scan/scan';
 import { OrderProvider } from '../../providers/order/order';
-import { AddNotePage } from '../add-note/add-note';
 import { Note } from '../../models/note';
 import { AuthProvider } from '../../providers/auth/auth';
-import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -22,25 +20,13 @@ export class ScanPage {
     constructor(public auth: AuthProvider, public scanService: ScanProvider, public orderService: OrderProvider, public navCtrl: NavController) {
     }
 
-    ionViewDidLoad() {
-        this.orderService.getOrder(2).subscribe(result => {
-            this.order = result;
-        })
-   
-        this.orderService.getNotesFromOrder(2).subscribe((result) => {
-            this.notes = result;
-        }, (error) => {
-            console.log('Something went wrong with retreiving the notes', error.text);
-        });
-    }
-
     ionViewCanEnter() {
-        this.auth.checkAuthentication()
-            .then((result) => {
-                return true;
-            }).catch((err) => {
-                return false;
-            });
+            this.auth.checkAuthentication()
+                .then((result) => {
+                    return true;
+                }).catch((err) => {
+                    return false;
+                });
     }
 
     onStartScanning(event) {
